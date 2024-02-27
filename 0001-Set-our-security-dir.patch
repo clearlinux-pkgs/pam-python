@@ -1,0 +1,25 @@
+From 8f1300a53bc7548abdfa5f62e658fb60a40f8e0f Mon Sep 17 00:00:00 2001
+From: "Brett T. Warden" <brett.t.warden@intel.com>
+Date: Tue, 27 Feb 2024 10:16:02 -0800
+Subject: [PATCH] Set our security dir
+
+---
+ src/pam_python.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/pam_python.c b/src/pam_python.c
+index bdb9a0b34975..39b5023606c7 100644
+--- a/src/pam_python.c
++++ b/src/pam_python.c
+@@ -60,7 +60,7 @@
+ #ifdef __APPLE__
+ #define DEFAULT_SECURITY_DIR	"/usr/lib/pam/"
+ #else
+-#define	DEFAULT_SECURITY_DIR	"/lib/security/"
++#define	DEFAULT_SECURITY_DIR	"/usr/lib64/security/"
+ #endif
+ #endif
+ 
+-- 
+2.43.2
+

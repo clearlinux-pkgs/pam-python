@@ -7,7 +7,7 @@
 #
 Name     : pam-python
 Version  : 20333b56dce49495ea14d39c0937a137a652c418
-Release  : 2
+Release  : 3
 URL      : https://github.com/sunweaver/pam-python/archive/20333b56dce49495ea14d39c0937a137a652c418/pam-python-20333b56dce49495ea14d39c0937a137a652c418.tar.gz
 Source0  : https://github.com/sunweaver/pam-python/archive/20333b56dce49495ea14d39c0937a137a652c418/pam-python-20333b56dce49495ea14d39c0937a137a652c418.tar.gz
 Summary  : No detailed summary available
@@ -21,7 +21,8 @@ BuildRequires : python3-dev
 # Suppress stripping binaries
 %define __strip /bin/true
 %define debug_package %{nil}
-Patch1: backport-use-new-PyConfig-API-when-building-against-Python-3.12-and-beyond.patch
+Patch1: 0001-Set-our-security-dir.patch
+Patch2: backport-use-new-PyConfig-API-when-building-against-Python-3.12-and-beyond.patch
 
 %description
 pam_python
@@ -58,13 +59,14 @@ license components for the pam-python package.
 %setup -q -n pam-python-20333b56dce49495ea14d39c0937a137a652c418
 cd %{_builddir}/pam-python-20333b56dce49495ea14d39c0937a137a652c418
 %patch -P 1 -p1
+%patch -P 2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1708993974
+export SOURCE_DATE_EPOCH=1709057868
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -98,7 +100,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1708993974
+export SOURCE_DATE_EPOCH=1709057868
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pam-python
 cp %{_builddir}/pam-python-%{version}/debian/copyright %{buildroot}/usr/share/package-licenses/pam-python/f61bb69fe63e01305f9e7b67b689aa0e3d887256 || :
